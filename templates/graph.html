@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% block title %}Graph Editor — GRAΦX{% endblock %}
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+{% block content %}
+<div class="editor">
+  <!-- LEFT: Controls -->
+  <div class="editor-panel">
+    <h2 class="panel-title">⚡ Graph Editor</h2>
+
+    <!-- Graph Type -->
+    <div class="control-group">
+      <label class="control-label">Graph Type</label>
+      <div class="type-btns">
+        <button class="type-btn active" data-type="iv_curve" onclick="setType('iv_curve', this)">IV Curve</button>
+        <button class="type-btn" data-type="bode_mag" onclick="setType('bode_mag', this)">Bode (Mag)</button>
+        <button class="type-btn" data-type="bode_phase" onclick="setType('bode_phase', this)">Bode (Phase)</button>
+      </div>
+    </div>
+
+    <!-- Title -->
+    <div class="control-group">
+      <label class="control-label">Graph Title</label>
+      <input type="text" id="graphTitle" class="control-input" placeholder="e.g. 1N4148 Diode IV Curve">
+    </div>
+
+    <!-- Axis Labels -->
+    <div class="control-row">
+      <div class="control-group">
+        <label class="control-label">X Label</label>
+        <input type="text" id="xLabel" class="control-input" placeholder="Voltage">
+      </div>
+      <div class="control-group">
+        <label class="control-label">X Unit</label>
+        <input type="text" id="xUnit" class="control-input" placeholder="V">
+      </div>
+    </div>
+    <div class="control-row">
+      <div class="control-group">
+        <label class="control-label">Y Label</label>
+        <input type="text" id="yLabel" class="control-input" placeholder="Current">
+      </div>
+      <div class="control-group">
+        <label class="control-label">Y Unit</label>
+        <input type="text" id="yUnit" class="control-input" placeholder="mA">
+      </div>
+    </div>
+
+    <!-- Data Input -->
+    <div class="control-group">
+      <label class="control-label">Data — paste CSV or type (X, Y per line)</label>
+      <div class="data-hint" id="dataHint">e.g.<br>0, 0<br>0.3, 0.1<br>0.6, 5<br>0.7, 20</div>
+      <textarea id="dataInput" class="control-textarea" placeholder="0, 0&#10;0.3, 0.1&#10;0.6, 5&#10;0.7, 20" rows="8"></textarea>
+    </div>
+
+    <!-- Options -->
+    <div class="control-group">
+      <label class="control-label">Options</label>
+      <div class="toggle-row">
+        <label class="toggle">
+          <input type="checkbox" id="bestFit" onchange="renderGraph()">
+          <span class="toggle-slider"></span>
+          Best Fit Line
+        </label>
+        <label class="toggle">
+          <input type="checkbox" id="logScale" onchange="renderGraph()">
+          <span class="toggle-slider"></span>
+          Log Y-Axis
+        </label>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="action-btns">
+      <button class="btn-primary full" onclick="renderGraph()">⚡ Plot Graph</button>
+      <button class="btn-ghost full" onclick="exportPNG()">📸 Export PNG</button>
+      <button class="btn-ghost full" onclick="saveGraph()">💾 Save Graph</button>
+    </div>
+
+    <div id="saveMsg" class="save-msg"></div>
+  </div>
+
+  <!-- RIGHT: Chart -->
+  <div class="editor-chart">
+    <div class="chart-toolbar">
+      <span id="chartLabel" class="chart-label">IV Curve</span>
+    </div>
+    <div class="chart-wrap">
+      <canvas id="mainChart"></canvas>
+      <div class="chart-empty" id="chartEmpty">
+        <div>📈</div>
+        <p>Enter data and click Plot Graph</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if graph %}
+<script>
+  const savedGraph = {
+    title: {{ graph.title|tojson }},
+    graph_type: {{ graph.graph_type|tojson }},
+    x_label: {{ graph.x_label|tojson }},
+    y_label: {{ graph.y_label|tojson }},
+    x_unit: {{ graph.x_unit|tojson }},
+    y_unit: {{ graph.y_unit|tojson }},
+    data: {{ graph.data_json|safe }},
+    best_fit: {{ graph.best_fit|tojson }}
+  };
+</script>
+{% else %}
+<script>const savedGraph = null;</script>
+{% endif %}
+<script src="{{ url_for('static', filename='js/graph.js') }}"></script>
+{% endblock %}
