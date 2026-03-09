@@ -34,6 +34,7 @@ Tired of fighting with Excel or waiting for MATLAB to load just to make a simple
 
 ## Project Structure
 
+```
 grafx/
 ├── app.py # Main Flask application: routes and core logic
 ├── requirements.txt # Python package dependencies
@@ -55,6 +56,7 @@ grafx/
 ├── css/style.css # All custom CSS, including dark/light theme variables
 └── js/graph.js # Core JavaScript: data parsing, chart rendering, best fit, export
 
+```
 
 ## Database Models (`database/models.py`)
 
