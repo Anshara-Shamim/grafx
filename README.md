@@ -5,7 +5,7 @@
 
 Tired of fighting with Excel or waiting for MATLAB to load just to make a simple graph for your lab report? GRAΦX is a web application built specifically for Electronic Engineering students to create clean, professional graphs like IV Curves and Bode Plots. Just paste your data, pick your graph type, and export.
 
-**[View Live Demo](#)** *<!-- TODO: Add link to your live app on Render.com -->*
+**[View Live Demo](https://grafx-production.up.railway.app/)**
 
 ---
 
