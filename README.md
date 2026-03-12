@@ -1,8 +1,5 @@
 # GRAΦX — Graph Maker for Engineering Students
 
-> Built by an Electronic Engineering Student
-> UI/CSS designed with assistance from Claude (Anthropic)
-
 Tired of fighting with Excel or waiting for MATLAB to load just to make a simple graph for your lab report? GRAΦX is a web application built specifically for Electronic Engineering students to create clean, professional graphs like IV Curves and Bode Plots. Just paste your data, pick your graph type, and export.
 
 **[View Live Demo](https://grafx-production.up.railway.app/)**
