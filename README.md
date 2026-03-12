@@ -35,7 +35,7 @@ Tired of fighting with Excel or waiting for MATLAB to load just to make a simple
 grafx/
 ├── app.py # Main Flask application: routes and core logic
 ├── requirements.txt # Python package dependencies
-├── Procfile # Instruction file for deployment on Render.com
+├── Procfile # Instruction file for deployment
 ├── .gitignore # Files and folders excluded from git (e.g., venv, .db)
 ├── README.md # This file
 ├── database/
