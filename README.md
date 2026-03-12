@@ -27,7 +27,7 @@ Tired of fighting with Excel or waiting for MATLAB to load just to make a simple
 - **Frontend:** HTML, CSS, JavaScript, Chart.js
 - **Database:** SQLite
 - **Authentication:** Werkzeug (password hashing) + Flask sessions
-- **Deployment:** Render.com (backend), Gunicorn (production server)
+- **Deployment:** Railway.com (backend), Gunicorn (production server)
 
 ## Project Structure
 
