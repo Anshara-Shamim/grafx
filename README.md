@@ -225,26 +225,3 @@ psycopg2-binary
 Then commit and push — Railway will redeploy automatically.
 
 ---
-
-## Running the Project Locally
-
-Follow these steps to get a development environment running.
-```bash
-# 1. Clone the repository
-git clone https://github.com/Anshara-Shamim/grafx.git
-cd grafx
-
-# 2. Create and activate a Python virtual environment
-python -m venv venv
-# On Windows:
-venv\Scripts\activate
-
-# 3. Install the required dependencies
-pip install -r requirements.txt
-
-# 4. Run the Flask development server
-python app.py
-
-# 5. Open your browser and go to:
-http://localhost:5000
-```
