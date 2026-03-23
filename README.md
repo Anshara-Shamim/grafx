@@ -222,6 +222,6 @@ Add `psycopg2-binary` to your `requirements.txt`:
 ```
 psycopg2-binary
 ```
-Then commit and push — Railway will redeploy automatically.
+Then commit and push Railway will redeploy automatically.
 
 ---
