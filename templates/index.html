@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}GRAΦX Engineering Graph Maker{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-bg">
+    <div class="grid-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">Built for ES Students</div>
+    <h1 class="hero-title">GRA<span class="accent">Φ</span>X</h1>
+    <p class="hero-sub">The simple way to graph your lab data.<br>IV curves, Bode plots, and best-fit lines, ready for your report.</p>
+    <div class="hero-btns">
+      <a href="{{ url_for('signup') }}" class="btn-primary">Start Plotting →</a>
+      <a href="{{ url_for('login') }}" class="btn-ghost">Login</a>
+    </div>
+    
+  </div>
+  <div class="hero-preview">
+    <div class="preview-card">
+      <div class="preview-label">IV CURVE | 1N4148 Diode</div>
+      <canvas id="previewChart" width="400" height="250"></canvas>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('previewChart').getContext('2d');
+  const v = [], i = [];
+  for (let vv = -1; vv <= 1; vv += 0.05) {
+    v.push(vv.toFixed(2));
+    i.push(parseFloat((1e-9 * (Math.exp(vv / 0.026) - 1)).toExponential(3)));
+  }
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: v,
+      datasets: [{
+        label: 'Current (A)',
+        data: i,
+        borderColor: '#00e5ff',
+        borderWidth: 2,
+        pointRadius: 0,
+        fill: true,
+        backgroundColor: 'rgba(0,229,255,0.08)'
+      }]
+    },
+    options: {
+      responsive: false,
+      plugins: { legend: { labels: { color: '#aaa', font: { family: 'DM Mono' } } } },
+      scales: {
+        x: { ticks: { color: '#666', maxTicksLimit: 6, font: { family: 'DM Mono' } }, grid: { color: '#222' }, title: { display: true, text: 'Voltage (V)', color: '#888' } },
+        y: { ticks: { color: '#666', font: { family: 'DM Mono' } }, grid: { color: '#222' }, title: { display: true, text: 'Current (A)', color: '#888' } }
+      }
+    }
+  });
+</script>
+{% endblock %}

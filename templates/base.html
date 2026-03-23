@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}GRAΦX{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <nav class="navbar">
+    <a href="{{ url_for('index') }}" class="nav-logo">GRA<span>Φ</span>X</a>
+    <div class="nav-links">
+      {% if session.get('user_id') %}
+        <span class="nav-user">{{ session.username }}</span>
+        <a href="{{ url_for('dashboard') }}" class="nav-btn">Dashboard</a>
+        <a href="{{ url_for('new_graph') }}" class="nav-btn primary">+ New Graph</a>
+        <a href="{{ url_for('logout') }}" class="nav-btn ghost">Logout</a>
+      {% else %}
+        <a href="{{ url_for('login') }}" class="nav-btn">Login</a>
+        <a href="{{ url_for('signup') }}" class="nav-btn primary">Sign Up</a>
+      {% endif %}
+      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">◐</button>
+    </div>
+  </nav>
+
+  <main>{% block content %}{% endblock %}</main>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+      localStorage.setItem('theme', html.getAttribute('data-theme'));
+    }
+    const saved = localStorage.getItem('theme');
+    if (saved) document.documentElement.setAttribute('data-theme', saved);
+  </script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
